@@ -1,0 +1,11 @@
+*
+!.gitignore
+!README.md
+!LICENSE
+!template-2002.zip
+
+!template
+!template/Makefile
+!template/*.bib
+!template/*.tex
+!template/*.sty
