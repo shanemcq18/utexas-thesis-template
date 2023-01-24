@@ -1,0 +1,117 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% main.tex
+%
+% Doctoral dissertation template for The University of Texas at Austin.
+% Major contributors:
+%       Young U. Ryu            1991
+%       Miguel A. Lerma         1995
+%       Craig McCluskey         2002
+%       Shane A. McQuarrie      2023
+%
+% DISCLAIMER: This file DOES NOT GUARANTEE the satisfaction of all requirements
+%       set forth by the Graduate School of The University of Texas at Austin.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[12pt]{report}
+\usepackage{utdiss}
+\input{config}
+\usepackage{eucal}
+
+% Author information ==========================================================
+\author{First Middle Last}                        % Author's full name.
+\address{youremail@utexas.edu}                    % Author's email address.
+\title{Title of Your Dissertation or Thesis}      % Title of the report.
+
+\supervisor{Supervisor Name}
+\committeemembers
+    [Committee Member Name]
+    [Committee Member Name]
+    [Committee Member Name]
+    {Committee Member Name}                       % Note the curly braces!
+
+\previousdegrees{B.S., M.S.}
+    % The abbreviated form of your previous degree(s).
+    % E.g., \previousdegrees{B.S., MBA}.
+    % Default: `B.S., M.S.'
+\graduationmonth{May}
+     % Graduation month, either May, August, or December, in the form
+     % as `\graduationmonth{May}'. Do not abbreviate.
+\graduationyear{2023}
+     % Graduation year, in the form as `\graduationyear{2001}'.
+     % Use the full four-digit number.
+\typist{the author}
+     % The name(s) of typist(s), put `the author' if you do it yourself.
+     % E.g., `\typist{Maryann Hersey and the author}'.
+
+% MASTERS DEGREES ONLY vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+
+% \degree{MASTER OF SCIENCE}            % Or MASTER OF ARTS, for example.
+% \degreeabbr{M.S.}                     % Or M.A., for example.
+% \masterthesis                         % Uncomment ONE of these.
+% \masterreport                         % Uncomment ONE of these.
+
+% MASTERS DEGREES ONLY ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+\makeindex
+
+\begin{document} % ============================================================
+
+\copyrightpage
+
+% DOCTORAL DEGREES: committee certification page first, title page second.
+\commcertpage
+\titlepage
+
+% MASTERS DEGREES: title page first, committee certification page second.
+% \titlepage
+% \commcertpage
+
+\begin{dedication} % ----------------------------------------------------------
+A short dedication to someone special.
+\end{dedication}
+
+\begin{acknowledgments} % -----------------------------------------------------
+\input{acknowledgments}
+\end{acknowledgments}
+
+\utabstract % -----------------------------------------------------------------
+\indent
+\input{abstract}
+
+% -----------------------------------------------------------------------------
+
+% \longtocentry                          % Uncomment if using >10 sections.
+\tableofcontents
+\listoftables
+\listoffigures
+
+% CHAPTERS --------------------------------------------------------------------
+
+\include{chapter-usage}
+
+\include{chapter-examples}
+
+% APPENDICES ------------------------------------------------------------------
+
+% \appendix     % Only one appendix   (choose one)
+\appendices     % Multiple appendices (choose one)
+
+\include{appendix-tips}
+
+\include{appendix-contributing}
+
+% END MATTER ------------------------------------------------------------------
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\printindex
+
+\begin{vita} % ----------------------------------------------------------------
+\noindent
+\input{vita}
+\end{vita}
+
+\end{document}

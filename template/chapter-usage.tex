@@ -1,0 +1,261 @@
+\chapter{Using This Template}
+
+This chapter discusses the anatomy of \texttt{main.tex}, the file that is compiled to produce the actual report.
+
+\section{Preamble} % ==========================================================
+
+The \emph{preamble} of a \texttt{.tex} file is everything that comes before \verb+\begin{document}+.
+\index{preamble}
+
+\subsection{Configuration} % --------------------------------------------------
+
+The document \texttt{main.tex} starts with the following lines.
+\begin{verbatim}
+    \documentclass[12pt]{report}
+    \usepackage{utdiss}
+    \input{config}
+\end{verbatim}
+
+The first line, \verb+\documentclass[12pt]{report}+, declares \texttt{report} as the document class with an option of 12pt for the character size (which is slightly greater that the default 10pt, but it's what the Office of the Graduate School recommends).
+You may include other options, as in any other \LaTeX{} document.
+
+The second line, \verb+\usepackage{utdiss}+, loads the \texttt{utdiss} package, which contains a set of commands intended to produce a document fulfilling the official requirements for a doctoral dissertation or master's thesis or report.
+
+The third line, \verb+\input{config}+, executes \texttt{config.tex}, which contains package imports and other customizations.
+This is the file that you should put any customizations like \verb+\newcommand{}+ macros.
+Note that \texttt{config.tex} is where the line spacing is set, chosen by uncommenting \textbf{one} of the following lines.
+\begin{verbatim}
+    % \singlespacing \singlespacequote
+    % \oneandonehalfspacing \oneandonehalfspacequote
+    % \doublespacing \doublespacequote
+\end{verbatim}
+\index{commands!singlespacing@\verb+\singlespacing+}%
+\index{commands!singlespacequote@\verb+\singlespacequote+}%
+\index{commands!oneandonehalfspacing@\verb+\oneandonehalfspacing+}%
+\index{commands!oneandonehalfspacequote@\verb+\oneandonehalfspacequote+}%
+\index{commands!doublespacing@\verb+\doublespacing+}%
+\index{commands!doublespacequote@\verb+\doublespacequote+}%
+At the time of writing, the Graduate School recommends at least one-and-a-half spacing.
+
+\subsection{Author Data} % -----------------------------------------------------
+
+The remainder of the preamble gathers data about the author and the committee.
+\begin{verbatim}
+    \author{First Middle Last}
+    \address{youremail@utexas.edu}
+    \title{Title of Your Dissertation or Thesis}
+
+    \supervisor{Supervisor Name}
+    \committeemembers
+        [Committee Member B]
+        [Committee Member C]
+        [Committee Member D]
+        {Committee Member E}        % Note the curly braces!
+
+    \previousdegrees{B.S., M.S.}
+    \graduationmonth{May}
+    \graduationyear{2023}
+    \typist{the author}
+\end{verbatim}
+Most of these commands are self explanatory.
+Some details:
+
+\begin{itemize}
+    \item \verb+\author{}+: \index{commands!author@\verb+\author{}+}%
+    Your full, official University name.
+    Mixed case (e.g., \texttt{McCluskey}) is fine.
+
+    \item \verb+\address{}+: \index{commands!address@\verb+\address{}+}%
+    An email address \textbf{that you will still be able to use after graduation}.
+    The Graduate School recommends \textbf{not} using a physical address for privacy/security reasons.
+
+    \item \verb+\title{}+: \index{commands!title@\verb+\title{}+}%
+    Your dissertation title.
+    If the title consists of more than one line, it should be in inverted pyramid form.
+    You may have to specify the line breakings by inserting newlines with \verb+\\+ or \verb+\newline+.
+
+    \item \verb+\supervisor{}+: \index{commands!supervisor@\verb+\supervisor{}+}%
+    The name of your advisor, i.e., the chair of your committee.
+    If you have co-supervisors, use \verb+\supervisor[First Supervisor]{Second Supervisor}+.
+
+    \item \verb+\committeemembers{}+: \index{commands!committee@\verb+\committeemembers[]{}+}%
+    The names of the members of your committee, in the order that you want them to appear.
+    Each name is surrounded in brackets \verb"[]" except for the final name, which goes in curly braces \verb"{}".
+
+    \item \verb+\previousdegrees{}+: \index{commands!previousdegrees@\verb+\previousdegrees{}+}%
+    Your previous degree(s), i.e., \texttt{B.S.} or \texttt{B.S., M.S.} or similar.
+
+    \item \verb+\graduationmonth{}+: \index{commands!graduationmonth@\verb+\graduationmonth{}+}%
+    The month of your graduation (May, August, or December).
+    Do not abbreviate the month.
+
+    \item \verb+\graduationyear{}+: \index{commands!graduationyear@\verb+\graduationyear{}+}%
+    The year of your graduation.
+    Use a 4 digit number (e.g., \texttt{2023}).
+
+    \item \verb+\typist{}+: \index{commands!typist@\verb+\typist{}+}%
+    The person who typed this report.
+    If you do it yourself, put ``\texttt{the author}''.
+\end{itemize}
+
+The preamble concludes with \verb+\makeindex+.
+Leave that command there, even if you do not have an index as described in \ref{sec:usage:index}
+
+\subsection{Modifications for Master's Degrees} % -----------------------------
+
+Reports and theses for master's degrees must also include \verb+\degree{}+ and \verb+\degreeabbr{}+ commands and EITHER \verb+\masterthesis+ OR \verb+\masterreport+ before \verb+\makeindex+.
+\begin{verbatim}
+    \degree{MASTER OF SCIENCE}          % Or MASTER OF ARTS, for example.
+    \degreeabbr{M.S.}                   % Or M.A., for example.
+    % \masterthesis                     % Uncomment ONE of these.
+    % \masterreport                     % Uncomment ONE of these.
+\end{verbatim}
+\index{master's degree!thesis}
+\index{master's degree!report}
+\index{commands!degree@\verb+\degree{}+}
+\index{commands!degreeabbr@\verb+\degreeabbr{}+}
+\index{commands!masterthesis@\verb+\masterthesis+}
+\index{commands!masterreport@\verb+\masterreport+}
+By default the document is formated as a doctoral dissertation.
+
+In addition, the \verb+\titlepage+ command must come before the \verb+\commcertpage+ command (see next section).
+
+\section{Front Matter} % =======================================================
+
+Immediately after \verb+\begin{document}+ are the following lines.
+\begin{verbatim}
+    \copyrightpage
+    \commcertpage
+    \titlepage
+
+    \begin{dedication}
+    A short dedication to someone special.
+    \end{dedication}
+
+    \begin{acknowledgments}
+    \input{acknowledgments}
+    \end{acknowledgments}
+
+    \utabstract
+    \indent
+    \input{abstract}
+
+    \tableofcontents
+    \listoftables
+    \listoffigures
+\end{verbatim}
+\index{commands!copyrightpage@\verb+\copyrightpage+}
+\index{commands!commcertpage@\verb+\commcertpage+}
+\index{commands!titlepage@\verb+\titlepage+}
+\index{environments!dedication@\verb+dedication+}
+\index{environments!acknowledgments@\verb+acknowledgments+}
+\index{commands!utabstract@\verb+\utabstract+}
+\index{commands!tableofcontents@\verb+\tableofcontents+}
+\index{commands!listoftables@\verb+\listoftables+}
+\index{commands!listoffigures@\verb+\listoffigures+}
+Leave these lines alone except for the dedication, the lines between \verb+\begin{dedication}+ and \verb+\end{dedication}+.
+Write something short, sweet, and possibly heartwarming within the \verb+\emph{}+.
+
+The text of the abstract should be placed in \texttt{abstract.tex}.
+Similarly, the text of the acknowledgments should be placed in \texttt{acknowledgments.tex}.
+
+If there are 10 or more sections, 10 or more subsections for a section,
+etc., you need adjust to the Table of Contents by using the
+command \verb+\longtocentry+.
+\index{commands!longtocentry@\verb+\longtocentry+}%
+This command allocates the proper horizontal space for double-digit
+numbers.
+
+\section{Body} % ==============================================================
+
+We've finally arrived at the actual text of the report, which should be organized into chapters and appendices.
+If you are writing a short dissertation
+that does not require chapters, use the command \verb+\nochapters+
+\index{commands!nochapters@\verb+\nochapters+}%
+Otherwise, we strongly recommend\footnote{See \url{https://www.overleaf.com/learn/latex/Management_in_a_large_project}.} placing the source text for each chapter or appendix in its own files to allow chapters to be easily inserted, re-ordered, or removed.
+This way, the next chunk of \texttt{main.tex} will then looks something like this:
+\begin{verbatim}
+    \include{chapter-introduction}
+    \include{chapter-usage}
+    \include{chapter-examples}
+    \include{chapter-conclusion}
+\end{verbatim}
+\index{commands!include@\verb+\include{}+}%
+
+\subsection{Chapters} % -------------------------------------------------------
+
+The beginning of each chapter file should begin with a \verb+\chapter[]{}+
+\index{commands!chapter@\verb+\chapter{}+}%
+command, which is similar to \verb"section{}".
+The part in \verb"[]" will be listed in the table of contents; the part in \verb"{}" will be printed in the body of the document.
+Use \verb+\chapter{}+ (without \verb"[]") to use the same title for both the table of contents and the body.
+
+If your chapter heading consists of more than one line, it will be automatically broken into separate lines.
+If you don't like the way LaTeX breaks the chapter heading into lines, use \verb+\newheadline+ to break lines.
+\textbf{Never use} \verb+\\+ \textbf{in sectional headings} (\verb+\chapter{}+, \verb+\section{}+, \verb+\subsection{}+, etc.)!
+\index{commands!chapter@\verb+\chapter{}+}%
+\index{commands!section@\verb+\section{}+}%
+\index{commands!subsection@\verb+\subsection{}+}%
+
+\subsection{Appendices} % -----------------------------------------------------
+\index{Appendices@\emph{Appendices}}%
+
+If you have no appendices, then proceed to the end matter.
+
+If you have a single appendix, use \verb+\appendix+ and \textbf{do not use}
+\verb+\chapter{}+ at the start of the appendix text.
+\index{commands!appendix@\verb+\appendix+}
+Otherwise the template will insert an extra page with only the word
+`Appendix' on it and cause the actual appendix to be labeled `Appendix 1'.
+
+If you have more than one appendix, use \verb+\appendices+
+\index{commands!appendices@\verb+\appendices+}
+and \verb+\include{}+ to include your appendices the same way as chapters.
+Each appendix should start with \verb+\chapter{}+, which will label them `Appendix A', `Appendix B', \ldots.
+
+\section{End Matter} % ========================================================
+
+After the body text and appendices come the bibliography, index (optional), and vita, in that order.
+
+\subsection{Bibliography} % ---------------------------------------------------
+\label{section:bibliography}
+
+We recommend using BiB\TeX{} to track your references.
+\index{BiBTeX@BiB\TeX{}}%
+Enter reference information in \texttt{references.bib} and use the \verb+\cite{}+ command to refer to them within the body.
+\index{commands!cite@\verb+\cite{}+}
+The following commands then create the bibliography.
+\begin{verbatim}
+    \bibliographystyle{plain}
+    \bibliography{references}
+\end{verbatim}
+\index{commands!bibliography@\verb+\bibliography{}+}
+If you have no references\footnote{If there are no references, is it even a dissertation?} and hence \verb+\cite{}+ is never used, comment these commands out to exclude the bibiliography.
+On the other end of the spectrum, you can use the command \verb+\nocite{*}+ to print all entries in \texttt{references.bib} in the bibliography, whether or not they were actually cited.
+
+\subsection{Index} % ----------------------------------------------------------
+\label{sec:usage:index}
+
+An index is \emph{optional}.
+This template uses three ingredients to make an index:
+\begin{enumerate}
+    \item \verb+\usepackage{makeidx}+ in \texttt{config.tex}.
+    \item \verb+\printindex+ in \texttt{main.tex}.
+    \item \verb+\index{}+ commands throughout the text.
+\end{enumerate}
+The \verb+\index{}+ command can be used a few ways.
+\index{commands!index@\verb+\index{}+}
+\begin{itemize}
+    \item \verb+\index{name}+ creates an entry in the index called `name'.
+    \item \verb+\index{name@\texttt{label}}+ creates an entry in the index calle `\texttt{label}', placed where `name' should appear.
+    \item \verb+\index{list!name}+ creates an entry called `list' and a subentry beneath it called `name'.
+\end{itemize}
+If you don't have an index, or if you start placing \verb+\index{}+ commands and run out of steam, simply comment out \verb+\printindex+ to remove the index (don't spend the time deleting old \verb+\index{}+ commands, ain't nobody got time for that).
+\index{commands!printindex@\verb+\printindex+}
+
+\subsection{Vita} % -----------------------------------------------------------
+
+The vita is a brief biographical sketch of the author and should be written in \texttt{vita.tex}.
+Note that the \verb"vita" environment (defined in \texttt{utdiss.sty}) uses the info in \verb+\address{}+ and \verb+\typist{}+ from the preamble to automatically generate a few final lines.
+\index{commands!address@\verb+\address{}+}
+\index{commands!typist@\verb+\typist{}+}

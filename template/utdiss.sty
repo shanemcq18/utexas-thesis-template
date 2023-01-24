@@ -1,0 +1,779 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% utdiss.sty
+%
+% Doctoral Dissertation Format for The University of Texas at Austin
+%   Contributors:
+%       Young U. Ryu            1991
+%       Miguel A. Lerma         1995
+%       Craig McCluskey         2002
+%       Shane A. McQuarrie      2023
+%
+% Usage:
+%
+% \documentclass[12pt]{report}
+% \usepackage{utdiss2}
+%
+% Note: This style file DOES NOT GUARANTEE the satisfaction
+%       of all requirements specified by the Graduate School
+%       of the University of Texas at Austin.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Page setup ==================================================================
+
+% Recent requirement: pages start at 1 with Arabic numbering.
+\pagenumbering{arabic}
+
+% Dimensions ------------------------------------------------------------------
+% These dimensions establish 1-inch margins on all sides with page numbers and
+% any headers at .5 inches from the bottom / top of the page, respectively.
+% To see the page layout, add \usepackage{layout} to config.tex and \layout*
+% in the body of main.tex.
+
+% Vertical margins.
+\voffset -.5in
+\topmargin 0in
+\headheight 12pt    % \headheight + \headsep = -\voffset = .5in = 36pt
+\headsep 24pt
+\textheight 9in
+\footskip .5in
+
+% Horizontal margins.
+\oddsidemargin 0pt
+\evensidemargin 0pt
+\textwidth 6.5in
+
+% Other (optional) dimensions.
+% \parindent .4in
+% \parskip 5 pt plus 1.5pt minus .5pt
+\itemsep 0 pt  % plus .5pt
+
+\newlength{\regular@textheight}
+\setlength{\regular@textheight}{\textheight}
+
+\newlength{\short@textheight}
+\setlength{\short@textheight}{\textheight}
+
+\def\short@page{%
+    \setlength{\textheight}{\short@textheight}
+    \global \pagestyle{plain}       % Always include page numbers.
+    \global \@colht\textheight
+    \global \@colroom\textheight
+    \global \vsize\textheight}
+
+\def\regular@page{%
+    \setlength{\textheight}{\regular@textheight}
+    \global \pagestyle{plain}       % Always include page numbers.
+    \global \@colht\textheight
+    \global \@colroom\textheight
+    \global \vsize\textheight}
+
+\newcounter{regular@short}
+
+\let\old@opcol\@opcol
+\def\@opcol{%
+    \ifnum\value{regular@short}=0 \regular@page\old@opcol
+    \else\short@page\old@opcol\fi}
+
+% Regarding the space after the zero in the value setting above:
+% "For best results, ALWAYS PUT A BLANK SPACE AFTER A NUMERIC CONSTANT;
+%  this blank space tells TeX that the constant is complete, and
+%  such a space will never "get through" to the output."
+% " ... a missing space ... might cause TeX to expand macros when you
+%  don't want any expansion, and such anomalies can cause subtle and
+%  confusing errors"
+%        - the TeXbook, p. 208.
+
+% Spacing setup ---------------------------------------------------------------
+\def\single@space{%
+    \vskip\baselineskip
+    \baselineskip=12pt plus .5pt minus .2pt
+    \vskip-\baselineskip}
+\def\endsingle@space{\par}
+
+\def\oneandonehalf@space{%
+    \vskip\baselineskip
+    \baselineskip=18pt plus .5pt minus .2pt
+    \vskip-\baselineskip}
+\def\endoneandonehalf@space{\par}
+
+\def\double@space{%
+    \vskip\baselineskip
+    \baselineskip=24pt plus .5pt minus .2pt
+    \vskip-\baselineskip}
+\def\enddouble@space{\par}
+
+% Spacing for quotations ------------------------------------------------------
+\let\old@quote\quote
+\let\endold@quote\endquote
+\let\old@quotation\quotation
+\let\endold@quotation\endquotation
+
+\def\singlespacequote{%
+    \def\quote{\old@quote\single@space}
+    \def\endquote{\endsingle@space\endold@quote}
+    \def\quotation{\old@quotation\single@space}
+    \def\endquotation{\endsingle@space\endold@quotation}}
+
+\def\oneandonehalfspacequote{%
+    \def\quote{\old@quote\oneandonehalf@space}
+    \def\endquote{\endoneandonehalf@space\endold@quote}
+    \def\quotation{\old@quotation\oneandonehalf@space}
+    \def\endquotation{\endoneandonehalf@space\endold@quotation}}
+
+\def\doublespacequote{%
+    \def\quote{\old@quote\double@space}
+    \def\endquote{\enddouble@space\endold@quote}
+    \def\quotation{\old@quotation\double@space}
+    \def\endquotation{\enddouble@space\endold@quotation}}
+
+% Spacing for regular text ----------------------------------------------------
+\def\doublespacing{%
+    \def\default@spacing{\baselineskip=23.5pt plus .5pt minus .2pt}}
+\def\oneandonehalfspacing{%
+    \def\default@spacing{\baselineskip=20.5pt plus .5pt minus .2pt}}
+\def\singlespacing{%
+    \def\default@spacing{\baselineskip=15.5pt plus .5pt minus .2pt}}
+
+% Sectioning ==================================================================
+
+% Table of contents -----------------------------------------------------------
+% NOTE: If there are 10 or more sections,
+%                    10 or more subsections for a section, etc. etc.
+% enter `\longtocentry' in config.tex (or somewhere before \begin{document}).
+
+%    Choose one of the following two \newlength commands depending
+%    upon how you want your Table of Contents to look.
+% \newlength{\one@num}\setlength{\one@num}{0pt}  % 1.5em  % indent of \section
+\newlength{\one@num}\setlength{\one@num}{18pt}
+% This above line makes indent of \section such that section numbers in
+%   Table of Contents are centered under the word, "Chapter" in the TOC line
+%   of their chapter.
+
+\newlength{\two@num}\settowidth{\two@num}{9.9...}
+\newlength{\three@num}\settowidth{\three@num}{9.9.9...}
+\newlength{\four@num}\settowidth{\four@num}{9.9.9.9...}
+\newlength{\five@num}\settowidth{\five@num}{9.9.9.9.9...}
+\newlength{\six@num}\settowidth{\six@num}{9.9.9.9.9.9...}
+
+\def\longtocentry{%
+\settowidth{\two@num}{99.99...}
+\settowidth{\three@num}{99.99.99...}
+\settowidth{\four@num}{99.99.99.99...}
+\settowidth{\five@num}{99.99.99.99.99...}
+\settowidth{\six@num}{99.99.99.99.99.99...}}
+
+\newlength{\c@onenum}
+    \setlength{\c@onenum}{\one@num}
+\newlength{\c@twonum}
+    \setlength{\c@twonum}{\c@onenum}\addtolength{\c@twonum}{\two@num}
+\newlength{\c@threenum}
+    \setlength{\c@threenum}{\c@twonum}\addtolength{\c@threenum}{\three@num}
+\newlength{\c@fournum}
+    \setlength{\c@fournum}{\c@threenum}\addtolength{\c@fournum}{\four@num}
+\newlength{\c@fivenum}
+    \setlength{\c@fivenum}{\c@fournum}\addtolength{\c@fivenum}{\five@num}
+
+\def\l@section{\@dottedtocline{1}{\c@onenum}{\two@num}}
+\def\l@subsection{\@dottedtocline{2}{\c@twonum}{\three@num}}
+% Old definition of subsubsection.
+%\def\l@subsubsection{\@dottedtocline{3}{\c@threenum}{\four@num}}
+\def\l@subsubsection{\@dottedtocline{2}{\c@threenum}{\four@num}}
+\def\l@paragraph{\@dottedtocline{4}{\c@fournum}{\five@num}}
+\def\l@subparagraph{\@dottedtocline{5}{\c@fivenum}{\six@num}}
+
+
+%
+% Define \nopage@addcontentsline to not place page numbers
+% in the table of contents.
+%
+\def\nopage@addcontentsline#1#2#3{\addtocontents{#1}%
+{\protect \contentsline {#2}{#3}{}}}  %%TODO: needed still?
+
+% Chapter headings ------------------------------------------------------------
+% Modified from `report.sty' to change the size of left skip
+%   for \chapter title which is longer than one line.
+\newlength{\toc@chap@indent}
+\settowidth{\toc@chap@indent}{\bf\@chapapp\space\thechapter.\hspace*{1em}}
+\def\l@chapter#1#2{\addpenalty{-\@highpenalty}
+    \vskip 1.0em plus 1pt
+    \@tempdima=\toc@chap@indent
+    \begingroup
+    \parindent \z@
+    \rightskip \@pnumwidth
+    \parfillskip -\@pnumwidth
+    \bf \leavevmode
+    \advance\leftskip\@tempdima \hskip -\leftskip #1\nobreak\hfil
+    \nobreak\hbox to\@pnumwidth{\hss #2}\par
+    \penalty\@highpenalty \endgroup}
+
+\def\@makechapterhead#1{ \vspace*{0pt} {\parindent 0pt % \centering
+    \ifnum \c@secnumdepth >\m@ne \Large\bf \@chapapp{} \thechapter
+    \par \vskip 15pt
+    \fi \Large \bf #1\par \nobreak \vskip 35pt}}
+
+\def\@makeschapterhead#1{\vspace*{0pt} {\parindent 0pt \centering
+    \Large \bf #1\par \nobreak \vskip 30pt}}
+
+\def\chapter{%
+    \clearpage
+    \short@page \setcounter{regular@short}{0}
+    \default@spacing
+    \parskip 0pt
+    \global\@topnum\z@ \@afterindenttrue        % Indent 1st line of chapter.
+    % \global\@topnum\z@ \@afterindentfalse     % Do NOT indent 1st line of ch.
+    \secdef\@chapter\@schapter}
+
+\def\shortchapter{%
+    \clearpage
+    \short@page \setcounter{regular@short}{1}
+    \default@spacing
+    \global\@topnum\z@ \@afterindenttrue        % Indent 1st line of short ch.
+    % \global\@topnum\z@ \@afterindentfalse     % Do NOT indent 1st line of ch.
+    \secdef\@chapter\@schapter}
+
+\newcount\chap@or@app\chap@or@app=1
+
+% Appendix --------------------------------------------------------------------
+\def\appendixname{Appendix}
+
+\def\appendix{\clearpage
+    \typeout{Appendix.}
+    \short@page
+        \markboth{}{}\pagestyle{myheadings}
+        \thispagestyle{plain}
+    \vspace*{\fill}
+    \centerline{\large\bf Appendix}
+    \vspace*{\fill}
+
+    \addcontentsline{toc}{chapter}{Appendix}  % <-
+
+    \setcounter{chapter}{0}
+    \setcounter{section}{0}
+    \def\@chapapp{\appendixname}
+    \chap@or@app=2
+    }
+
+\def\appendices{\clearpage
+    \typeout{Appendices.}
+    \short@page \setcounter{regular@short}{1}
+        \markboth{}{}\pagestyle{myheadings}
+        \thispagestyle{plain}
+    \vspace*{\fill}
+    \centerline{\large\bf Appendices}
+    \vspace*{\fill}
+
+    \addcontentsline{toc}{chapter}{Appendices}    % <-
+
+    \setcounter{chapter}{0}
+    \setcounter{section}{0}
+    \def\@chapapp{\appendixname}
+    \chap@or@app=2
+    \def\thechapter{\Alph{chapter}}}
+
+% Counters --------------------------------------------------------------------
+% Redefinition of \@part for using by \part
+\newcount\with@parts\with@parts=0
+\def\@part[#1]#2{%
+    \short@page
+    \ifnum \c@secnumdepth >-2 \relax
+        \refstepcounter{part}
+        \addcontentsline{toc}{part}{\partname~\thepart\hspace{1em}#1}%
+    \else
+        \addcontentsline{toc}{part}{#1}%
+    \fi
+    \markboth{}{}
+    {\centering
+    \interlinepenalty \@M
+    \reset@font
+     \ifnum \c@secnumdepth >-2 \relax
+       \huge\bfseries \partname~\thepart
+       \par
+       \vskip 20\p@
+     \fi
+     \Huge \bfseries #2\par}
+    \@endpart}
+% End redefinition of \@part
+
+% First page a new "major" section
+\newcommand\fpage{\clearpage \short@page \thispagestyle{plain}}
+
+\newcounter{no@chapters}
+\setcounter{no@chapters}{0}
+
+\newcommand\nochapters{
+    \setcounter{no@chapters}{1}
+    \fpage
+    \setcounter{regular@short}{0}
+
+    % Determine indention of text with no chapters.
+    \global\@topnum\z@ \@afterindenttrue        % Indent 1st lines.
+%    \global\@topnum\z@ \@afterindentfalse      % Do NOT indent 1st lines.
+    \pagenumbering{arabic}
+    \markboth{}{}\pagestyle{
+    \addtocontents{toc}{\protect\addvspace{10pt}}
+
+    \renewcommand{\thesection}{\arabic{section}}
+    \renewcommand{\theequation}{\arabic{equation}}
+    \renewcommand{\thefigure}{\@arabic\c@figure}
+    \renewcommand{\thetable}{\@arabic\c@table}
+
+    \default@spacing}
+}
+
+\def\@chapter[#1]#2{\ifnum \c@secnumdepth >\m@ne
+    \refstepcounter{chapter}
+    \typeout{\@chapapp\space\thechapter.}
+    \addcontentsline{toc}{chapter}{\@chapapp\space\thechapter.\hspace*{1em}#1}\else
+    \addcontentsline{toc}{chapter}{#1}\fi
+    % \chaptermark{#1}
+    \addtocontents{lof}{\protect\addvspace{10pt}}
+    \addtocontents{lot}{\protect\addvspace{10pt}}
+    \@makechapterhead{#2} \@afterheading
+    \ifnum\chap@or@app=1 \ifnum\value{chapter}=1
+        \markboth{}{}\pagestyle{myheadings}
+    \fi\fi
+    \thispagestyle{plain}
+}
+
+\def\@schapter#1{\thispagestyle{plain}
+        \@makeschapterhead{#1} \@afterheading}
+
+% Sections and subsections ----------------------------------------------------
+\def\section{%
+     \ifnum\value{no@chapters}=1 \fpage \fi
+     \@startsection{section}{1}{\z@}%
+    {4.6ex plus -1ex minus -.2ex}{.3ex plus .2ex}{\large\bf}
+}
+
+\def\subsection{\@startsection{subsection}{2}{\z@}%
+    {3.9ex plus -1ex minus -.2ex}{.2ex plus .2ex}{\normalsize\bf}
+}
+
+\def\subsubsection{\@startsection{subsubsection}{2}{\z@}%
+    {3.9ex plus -1ex minus -.2ex}{.2ex plus .2ex}{\normalsize\bf}
+}
+
+\def\thebibliography#1{\chapter*{Bibliography}
+    \addcontentsline{toc}{chapter}{Bibliography}
+    \list
+    {[\arabic{enumi}]}{\settowidth\labelwidth{[#1]}\leftmargin\labelwidth
+    \advance\leftmargin\labelsep
+    \usecounter{enumi}} \def\newblock{\hskip .11em plus .33em minus -.07em}
+\let\endthebibliography=\endlist}
+
+% Index -----------------------------------------------------------------------
+\newlength{\s@short@textheight}
+\setlength{\s@short@textheight}{\short@textheight}
+\addtolength{\s@short@textheight}{-\footskip}
+
+\def\ishort@page{%
+    \setlength{\textheight}{\s@short@textheight}
+    \global \@colht\textheight
+    \global \@colroom\textheight
+    \global \vsize\textheight}
+
+\newcounter{regular@short@col}
+
+\def\index@opcol@def{%
+   \def\@opcol{%
+      \ifnum\value{regular@short@col}=0 \old@opcol\regular@page
+      \else\old@opcol%
+            \ishort@page\addtocounter{regular@short@col}{-1}%
+      \fi}%
+}
+
+\renewenvironment{theindex}
+    {\if@twocolumn
+        \@restonecolfalse
+    \else
+        \@restonecoltrue
+    \fi
+    \let\current@opcol\@opcol
+    \columnseprule \z@
+    \columnsep 35\p@
+    \twocolumn[\@makeschapterhead{\indexname}]%
+    \@mkboth{\uppercase{\indexname}}%
+            {\uppercase{\indexname}}%
+    \addcontentsline{toc}{chapter}{\indexname}%
+        \ishort@page
+        \setcounter{regular@short@col}{1}%
+        \index@opcol@def%
+    \thispagestyle{plain}\parindent\z@
+    \parskip\z@ \@plus .3\p@\relax
+
+    % Line spacing in the index:
+    \single@space               % Single-spaced index.
+    % \oneandonehalf@space      % One-and-one-half spaced index.
+    \let\item\@idxitem}
+    {\let\@opcol\current@opcol%
+        \if@restonecol\onecolumn\else\clearpage\fi}
+
+% Document type ===============================================================
+
+% Master's Thesis -------------------------------------------------------------
+\def\masterthesis{%
+    \def\doc@type{thesis}
+    \def\DOC@TYPE{THESIS}
+    \def\certif@words{ }
+    \def\approvalwords{%
+            \leftline{\hbox to 2.5in{}APPROVED BY\hfill}
+            \leftline{\hbox to 2.5in{}SUPERVISING COMMITTEE:\hfill}
+    }
+    \def\pubnum{}
+}
+
+% Master's Report -------------------------------------------------------------
+\def\masterreport{
+    \def\doc@type{report}
+    \def\DOC@TYPE{REPORT}
+    \def\certif@words{ }
+    \def\approvalwords{%
+         \leftline{\hbox to 2.5in{}APPROVED BY\hfill}
+         \leftline{\hbox to 2.5in{}SUPERVISING COMMITTEE:\hfill}
+    }
+    \def\pubnum{}
+}
+
+% Dissertation ----------------------------------------------------------------
+\def\dissertation{
+    \def\doc@type{dissertation}
+    \def\DOC@TYPE{DISSERTATION}
+    \def\previous@degrees{B.S., M.S.}
+    \def\target@degree{Ph.D.}
+    \def\d@gree{DOCTOR OF PHILOSOPHY}
+    \def\certif@words{
+        \centerline{The Dissertation Committee for \au@thor}
+        \centerline{certifies that this is the approved version\
+            of the following dissertation:}
+    }
+    \def\approvalwords{
+         \leftline{\hbox to 4.4in{}\textbf{Committee}:\hfill}
+    }
+    \def\pubnum{\centerline{Publication No. \rule{1.5in}{0.4pt}}}
+}
+
+% Author data =================================================================
+
+% Default data (author, dissertation, etc.) -----------------------------------
+\dissertation                       % By default the document is a dissertation.
+
+\def\au@thor{\bf Author Name Required !!!}
+\def\AU@THOR{\bf \uppercase{Author Name Required !!!}}
+\def\ti@tle{\bf Title Required !!!}
+
+\def\graduation@month{\ifcase\month\or
+    May\or May\or May\or May\or May\or August\or August\or
+    August\or December\or December\or December\or December\fi}
+\def\graduation@year{\number\year}
+
+\def\add@ress{\bf Permanent Address Required !!!}
+\def\type@ist{the author}
+
+% Input data (author, dissertation, etc.) -------------------------------------
+\def\doctype#1{\def\doc@type{#1}\def\DOC@TYPE{\uppercase{#1}}}
+\def\author#1{\def\au@thor{#1}\def\AU@THOR{\uppercase{#1}}}
+
+\def\title#1{\def\ti@tle{\double@space{#1}}}
+
+\def\previousdegrees#1{\def\previous@degrees{#1}}
+\def\degreeabbr#1{\def\target@degree{#1}}
+\def\degree#1{\def\d@gree{#1}}
+
+\def\graduationmonth#1{\def\graduation@month{#1}}
+\def\graduationyear#1{\def\graduation@year{#1}}
+
+\def\address#1{\def\add@ress{#1}}
+\def\typist#1{\def\type@ist{#1}}
+
+% Committee certification page.
+\def\supervisora{\bf Supervisor Required}
+\def\supervisorb{}
+\def\supervisorc{}
+\def\committeemembera{}
+\def\committeememberb{}
+\def\committeememberc{}
+\def\committeememberd{}
+\def\committeemembere{}
+\def\committeememberf{}
+
+\newcount\numberofsupervisors\numberofsupervisors=1
+\newcount\supervisornumbercounter
+
+\newcount\numberofmembers\numberofmembers=0
+\newcount\membernumbercounter
+
+\def\signturelines{%
+    % Supervisor lines.
+    \supervisornumbercounter=0
+    {\loop\ifnum\supervisornumbercounter<\numberofsupervisors
+        \advance\supervisornumbercounter by1
+        % \signline
+        % \vspace*{-18pt}
+        \ifnum\supervisornumbercounter=1
+        \rightline{\hbox to 2.53in{}{\supervisora, Supervisor}}
+        \fi
+        \ifnum\supervisornumbercounter=2
+        \rightline{\hbox to 2.53in{}{\supervisorb, Supervisor}}
+        \fi
+        \ifnum\supervisornumbercounter=3
+        \rightline{\hbox to 2.53in{}{\supervisorc, Supervisor}}
+        \fi
+    \repeat}
+    % Other member lines.
+    \membernumbercounter=0
+    {\loop\ifnum\membernumbercounter<\numberofmembers
+        \advance\membernumbercounter by1
+        % \signline
+        % \vspace*{-18pt}
+        \ifnum\membernumbercounter=1
+        \rightline{\hbox to 2.53in{}{\committeemembera}}
+        \fi
+        \ifnum\membernumbercounter=2
+        \rightline{\hbox to 2.53in{}{\committeememberb}}
+        \fi
+        \ifnum\membernumbercounter=3
+        \rightline{\hbox to 2.53in{}{\committeememberc}}
+        \fi
+        \ifnum\membernumbercounter=4
+        \rightline{\hbox to 2.53in{}{\committeememberd}}
+        \fi
+        \ifnum\membernumbercounter=5
+        \rightline{\hbox to 2.53in{}{\committeemembere}}
+        \fi
+        \ifnum\membernumbercounter=6
+        \rightline{\hbox to 2.53in{}{\committeememberf}}
+        \fi
+    \repeat}
+}
+
+% Supervisor / co-supervisor --------------------------------------------------
+\def\supervisor{%
+    \@ifnextchar [{\greaterthan1supervisor}{\onesupervisor}}
+\def\greaterthan1supervisor[#1]{%
+    \@ifnextchar [{\threesupervisors[#1]}{\twosupervisors[#1]}}
+
+\def\onesupervisor#1{%
+    \def\supervisora{#1}}
+\def\twosupervisors[#1]#2{%
+    \def\supervisora{#1}
+    \def\supervisorb{#2}
+    \numberofsupervisors=2}
+\def\threesupervisors[#1][#2]#3{%
+    \def\supervisora{#1}
+    \def\supervisorb{#2}
+    \def\supervisorc{#3}
+    \numberofsupervisors=3}
+
+% Committee members -----------------------------------------------------------
+\def\committeemembers{%
+    \@ifnextchar [{\morethanonemember}
+    {\onecommitteemember}}
+\def\morethanonemember[#1]{%
+    \@ifnextchar [{\morethantwomembers[#1]}
+    {\twocommitteemembers[#1]}}
+\def\morethantwomembers[#1][#2]{%
+    \@ifnextchar [{\morethanthreemembers[#1][#2]}
+    {\threecommitteemembers[#1][#2]}}
+\def\morethanthreemembers[#1][#2][#3]{%
+    \@ifnextchar [{\morethanfourmembers[#1][#2][#3]}
+    {\fourcommitteemembers[#1][#2][#3]}}
+\def\morethanfourmembers[#1][#2][#3][#4]{%
+    \@ifnextchar [{\sixcommitteemembers[#1][#2][#3][#4]}
+    {\fivecommitteemembers[#1][#2][#3][#4]}}
+
+\def\onecommitteemember#1{%
+    \def\committeemembera{#1}
+    \numberofmembers=1}
+\def\twocommitteemembers[#1]#2{%
+    \def\committeemembera{#1}
+    \def\committeememberb{#2}
+    \numberofmembers=2}
+\def\threecommitteemembers[#1][#2]#3{%
+    \def\committeemembera{#1}
+    \def\committeememberb{#2}
+    \def\committeememberc{#3}
+    \numberofmembers=3}
+\def\fourcommitteemembers[#1][#2][#3]#4{%
+    \def\committeemembera{#1}
+    \def\committeememberb{#2}
+    \def\committeememberc{#3}
+    \def\committeememberd{#4}
+    \numberofmembers=4}
+\def\fivecommitteemembers[#1][#2][#3][#4]#5{%
+    \def\committeemembera{#1}
+    \def\committeememberb{#2}
+    \def\committeememberc{#3}
+    \def\committeememberd{#4}
+    \def\committeemembere{#5}
+    \numberofmembers=5}
+\def\sixcommitteemembers[#1][#2][#3][#4][#5]#6{%
+    \def\committeemembera{#1}
+    \def\committeememberb{#2}
+    \def\committeememberc{#3}
+    \def\committeememberd{#4}
+    \def\committeemembere{#5}
+    \def\committeemembere{#6}
+    \numberofmembers=6}
+
+% Dissertation components =====================================================
+
+% Committee certification page ------------------------------------------------
+\def\commcertpage{
+    \certif@words
+    \vspace*{25pt}
+    \baselineskip=16.5pt plus .5pt minus .2 pt
+    \baselineskip=28.5pt plus .5pt minus .2 pt
+    \begin{center}
+    % \large\bf\TI@TLE      % All capitals title.
+    \large\bf\ti@tle        % Mixed case title.
+    \end{center}
+    \vspace*{25pt}
+    \approvalwords
+    %\bigskip\medskip\smallskip
+    % \bigskip
+    % \vspace*{25pt}
+    \signturelines
+    \clearpage
+}
+
+% Copyright page --------------------------------------------------------------
+\def\copyrightpage{
+    \vspace*{\fill}
+    \centerline{\bf Copyright}
+    \vspace*{25pt}
+    \centerline{\bf by}
+    \vspace*{25pt}
+    \centerline{\bf \au@thor}
+    \vspace*{25pt}
+    \centerline{\bf \graduation@year}
+    \vfill\clearpage
+}
+
+% Dedication page -------------------------------------------------------------
+\newenvironment{dedication}{
+    \vspace*{170pt}\begin{center}\itshape\default@spacing}%
+    {\end{center}\clearpage}
+
+% Title Page ------------------------------------------------------------------
+\def\titlepage{
+    \vspace*{5pt}
+    \baselineskip=22.5pt plus .5pt minus .2 pt
+    \begin{center}
+    \baselineskip=28.5pt plus .5pt minus .2 pt
+    % \large\bf\TI@TLE      % All capitals title.
+    \large\bf\ti@tle        % Mixed case title.
+    \end{center}
+    \vspace{25pt}
+    \centerline{\large by}
+    \vspace{25pt}
+    \centerline{\large\bf\au@thor}
+    % \vfill
+    \vspace{25pt}
+    \begin{center}
+    {\bf\DOC@TYPE}\\
+    \vspace{.5cm}
+    Presented to the Faculty of the Graduate School\\
+    of the University of Texas at Austin\\
+    in Partial Fulfillment\\
+    of the Requirements\\
+    for the Degree of\\
+    \vspace{.5cm}
+    {\bf\d@gree}
+    \end{center}
+    \vspace{25pt}
+    \centerline{The University of Texas at Austin}
+    \centerline{\graduation@month\ \graduation@year}
+    \clearpage
+    \setcounter{regular@short}{1}
+}
+
+% Acknowledgments -------------------------------------------------------------
+\def\acknowledgments{%
+    \shortchapter*{Acknowledgments}
+    \addcontentsline{toc}{chapter}{Acknowledgments}
+    \pagestyle{plain}
+}
+
+% Preface ---------------------------------------------------------------------
+\def\preface{%
+    \shortchapter*{Preface}
+    \addcontentsline{toc}{chapter}{Preface}
+    \pagestyle{plain}
+}
+
+% Abstract --------------------------------------------------------------------
+
+% NOTE: here it has been necessary to change the name of the keyword for the
+% abstract, otherwise the page number is automatically reset to 1.
+
+\def\utabstract{\clearpage
+    \short@page
+    \setcounter{regular@short}{1}
+    \pagestyle{plain}
+    \addcontentsline{toc}{chapter}{Abstract}
+    \baselineskip 14pt plus .5pt minus .2 pt
+    \begin{center}
+    \baselineskip=22.5pt plus .5pt minus .2 pt
+    % \large\bf\TI@TLE      % All capitals title.
+    \large\bf\ti@tle        % Mixed case title.
+    \end{center}
+    \vspace*{25pt}
+    \centerline{by}
+    \vspace*{25pt}
+    \centerline{\au@thor, \target@degree}
+    \vspace*{5pt}
+    \centerline{The University of Texas at Austin, \graduation@year}
+    \vspace{5pt}
+    \centerline{Supervisor: \supervisora}
+    \vspace{25pt}
+    \default@spacing
+    \indent
+    % \noindent
+}
+
+\def\abstract{\typeout{WARNING: Please, use the keyword %
+'utabstract' instead of 'abstract'!}}
+
+
+% Table of contents -----------------------------------------------------------
+\def\tableofcontents{%
+    \shortchapter*{Table of Contents}
+    \pagestyle{plain}
+    \baselineskip=18pt      % One-and-a-half spacing
+    \@starttoc{toc}
+}
+
+% List of Figures -------------------------------------------------------------
+\def\listoffigures{%
+    \shortchapter*{List of Figures}
+    \addcontentsline{toc}{chapter}{List of Figures}
+    \pagestyle{plain}
+    \baselineskip=12pt      % Single spacing in the captions
+    \parskip=12pt           % Double spacing between entries
+    \@starttoc{lof}
+}
+
+% List of Tables --------------------------------------------------------------
+\def\listoftables{%
+    \shortchapter*{List of Tables}
+    \addcontentsline{toc}{chapter}{List of Tables}
+    \pagestyle{plain}
+    \baselineskip=12pt     % Single spacing in the captions
+    \parskip=12pt          % Double spacing between entries
+    \@starttoc{lot}
+}
+
+% Vita ------------------------------------------------------------------------
+\newenvironment{vita}{\vitahead}{\vitatail}
+\def\vitahead{\chapter*{Vita}\thispagestyle{plain}
+    \addcontentsline{toc}{chapter}{Vita} }
+\def\vitatail{\par\vfill\par\noindent %
+    Address: \parbox[t]{3.5in}{\raggedright\add@ress}
+    \par\vfill\par\noindent %
+    This \doc@type{} was typeset with \LaTeX{} by \type@ist.
+}
+
+% Default line spacing is one-and-a-half spacing.
+\oneandonehalfspacing
+\oneandonehalfspacequote

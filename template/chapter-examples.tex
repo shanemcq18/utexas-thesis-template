@@ -1,0 +1,126 @@
+\chapter{Examples of Content}
+\label{chapter:examples}
+
+This chapter shows some simple examples for including technical information in the body of the report via mathematics, tables, figures, and references.
+If you are unfamiliar with \LaTeX{}, see \url{https://www.overleaf.com/learn/latex/Tutorials} for an excellent suite of tutorials.
+
+\section{Writing Mathematics} % ===============================================
+
+Here we show some examples of writing mathematics in the report and using theorem environments.
+
+Here are some equations using the \texttt{align} environment.
+\begin{align}
+    \label{eq:quadratic}
+    0
+    &= ax^{2} + bx + c
+    \\
+    \label{eq:quadraticroots}
+    x
+    &= \frac{-b + \sqrt{b^{2} - 4ac}}{2a}
+\end{align}
+\index{environments!align@\verb+align+}
+
+The configuration file \texttt{config.tex} defines the following ``theorem'' environments.
+\begin{itemize}
+    \item \texttt{theorem}
+    \index{environments!theorem@\verb+theorem+}
+    \item \texttt{corollary}
+    \index{environments!corollary@\verb+corollary+}
+    \item \texttt{lemma}
+    \index{environments!lemma@\verb+lemma+}
+    \item \texttt{proposition}
+    \index{environments!proposition@\verb+proposition+}
+    \item \texttt{definition}
+    \index{environments!definition@\verb+definition+}
+    \item \texttt{remark}
+    \index{environments!remark@\verb+remark+}
+    \item \texttt{notation}
+    \index{environments!notation@\verb+notation+}
+\end{itemize}
+The \texttt{proof} environment is also available by default.
+\index{environments!proof@\verb+proof+}
+
+\begin{lemma}[An Example Lemma]
+\label{lemma:example}
+
+Let $A$ and $B$ be sets with $A \subset B$.
+Then $A\cap B = A$.
+
+\begin{proof}
+We must show that $A\cap B \subset A$ and $A \subset A \cap B$.
+For the first, let $x \in A \cap B$.
+By definition, $x \in A$, hence $A \cap B \subset A$.
+For the other direction, let $y \in A$. Since $A \subset B$, $y \in B$ as well.
+Thus, $y \in A \cap B$, which implies $A\cap B \subset A$.
+\end{proof}
+\end{lemma}
+
+\begin{theorem}
+\label{thm:example}
+Theorems look just like lemmata, except they are called `Theorem' instead of `Lemma'.
+\end{theorem}
+
+\section{Making Tables} % =====================================================
+
+The \verb"table" environment creates a table, which usually contains a \verb"tabular" environment that houses the actual table text.
+The \verb"table" environment takes an optional argument to indicate the position for the table as described in \Cref{table:positions}.
+\index{environments!table@\verb+table+}%
+\index{environments!tabular@\verb+tabular+}%
+
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{r|l}
+    argument & position
+    \\ \hline
+    \texttt{h} & ``here'' if possible \\
+    \texttt{t} & top of the page \\
+    \texttt{b} & bottom of the page \\
+    \texttt{p} & on the page of floats \\
+    \texttt{H} & ``here'' no matter what (requires \verb"\usepackage{float}")
+\end{tabular}
+\caption[Arguments for the \texttt{table} environment.]{
+    Arguments for the \texttt{table} environment. It is possible to combine several of these arguments, such as \texttt{ht} (``here'' if possible, otherwise on top of the page). The default is \texttt{tbp}.
+}
+\label{table:positions}
+\end{table}
+
+Use \verb"\caption[short caption]{long caption}" to add a caption to the table.
+\index{caption@\verb"\caption{}"}
+The \texttt{short caption} is used in the List of Tables
+\index{List of Tables@\emph{List of Tables}}%
+while the \texttt{long caption} appears in the actual text.
+Note that \verb"\label{}" must come after \verb"\caption{}" to create a label that can be referred to elsewhere in the text with \verb"\Cref{}".
+
+\section{Including Figures} % =================================================
+
+The \verb"figure" environment
+\index{environments!figure@\verb+figure+}
+creates a figure, which usually contains an \verb"\includegraphics{}" command to import the figure from an external file.
+The \verb"figure" environment takes the same optional arguments as the \verb"table" environment shown in \Cref{table:positions}.
+
+\begin{figure}[th]
+    \centering
+    \includegraphics[width=.7\textwidth]{figures/oden.pdf}
+    \caption[An example figure.]{This is an example of a figure.}
+    \label{figure:example}
+\end{figure}
+
+Use \verb"\caption[short caption]{long caption}" to add a caption to the figure.
+\index{caption@\verb"\caption{}"}
+The \texttt{short caption} is used in the List of Figures
+\index{List of Figures@\emph{List of Figures}}%
+while the \texttt{long caption} appears in the actual text.
+Note that \verb"\label{}" must come after \verb"\caption{}" to create a label that can be referred to elsewhere in the text with \verb"\Cref{}".
+
+We recommend placing figure files in a separate \verb"figures/" folder to keep your working directory organized.
+
+
+\section{Citations} % =========================================================
+
+The bibliography is discussed in \Cref{section:bibliography}.
+Use the \verb"\cite{}" command to refer to entries defined in \texttt{references.bib}:
+\begin{itemize}
+    \item Cite a single reference \cite{knuth1984texbook}.
+    \item Cite multiple references \cite{lamport1994latex, goosens1994latex}.
+\end{itemize}

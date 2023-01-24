@@ -9,3 +9,5 @@
 !template/*.bib
 !template/*.tex
 !template/*.sty
+!template/figures
+!template/figures/*.pdf

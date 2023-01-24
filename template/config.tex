@@ -1,0 +1,53 @@
+% Imports ---------------------------------------------------------------------
+
+% Required packages.
+\usepackage{amsfonts}           % Write mathematics.
+\usepackage{amscd}              % Write mathematics.
+\usepackage{amsmath}            % Write mathematics.
+\usepackage{amsthm}             % Write mathematics.
+\usepackage{cleveref}           % Make references with \cref{}.
+\usepackage{graphicx}           % Include figures from external files.
+\usepackage{lmodern}            % Handle font sizes.
+\usepackage{makeidx}            % For making an index.
+
+% Optional packages.
+% \usepackage{draftwatermark}   % "DRAFT" watermark in background.
+
+% Packages used solely for the explanation in the template.
+\usepackage{blindtext}          % Nonsense text.
+\usepackage{layout}             % Draw the page layout with \layout*.
+\usepackage{url}                % Typesetting URLs.
+\usepackage{verbatim}           % Quote block of text verbatim.
+
+% Page setup ------------------------------------------------------------------
+
+%% Line spacing (uncomment one).
+% \singlespacing \singlespacequote
+% \oneandonehalfspacing \oneandonehalfspacequote        % DEFAULT
+% \doublespacing \doublespacequote
+
+%% If there are 10 or more sections, 10 or more subsections for a section,
+%% etc., you need to adjust the Table of Contents with \longtocentry.
+% \longtocentry
+
+% Math ------------------------------------------------------------------------
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[chapter]
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}[chapter]
+\newtheorem*{notation}{Notation}
+
+% Number equations and theorems by chapter (Theorem 2.1, 2.2, ...).
+% \numberwithin{theorem}{chapter}
+\numberwithin{equation}{chapter}
+\crefformat{equation}{(#2#1#3)}
+
+% Other customizations --------------------------------------------------------
