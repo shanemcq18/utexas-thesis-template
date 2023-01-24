@@ -11,3 +11,7 @@
 !template/*.sty
 !template/figures
 !template/figures/*.pdf
+
+!.github
+!.github/workflows
+!.github/workflows/*.yml
