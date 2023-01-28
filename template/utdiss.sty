@@ -246,13 +246,13 @@
     \centerline{\large\bf Appendix}
     \vspace*{\fill}
 
-    \addcontentsline{toc}{chapter}{Appendix}  % <-
+    \addcontentsline{toc}{chapter}{Appendix}
 
     \setcounter{chapter}{0}
     \setcounter{section}{0}
     \def\@chapapp{\appendixname}
     \chap@or@app=2
-    }
+}
 
 \def\appendices{\clearpage
     \typeout{Appendices.}
@@ -263,13 +263,15 @@
     \centerline{\large\bf Appendices}
     \vspace*{\fill}
 
-    \addcontentsline{toc}{chapter}{Appendices}    % <-
+    \addcontentsline{toc}{chapter}{Appendices}
 
     \setcounter{chapter}{0}
     \setcounter{section}{0}
     \def\@chapapp{\appendixname}
     \chap@or@app=2
-    \def\thechapter{\Alph{chapter}}}
+    \def\thechapter{\Alph{chapter}}
+    \numberwithin{equation}{chapter}              % Equations (A.1), (A.2), ...
+}
 
 % Counters --------------------------------------------------------------------
 % Redefinition of \@part for using by \part

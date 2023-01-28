@@ -18,4 +18,11 @@ See \Cref{figure:layout}.
 Instead of \verb"\ref{}" or \verb"\eqref{}", use \verb"\cref{}".
 Use \verb"\Cref{}" if you want to ensure that the first word is capitalized (e.g., `Figure').
 \index{commands!cref@\verb+\cref{}+}
+
+\item This is how a labeled equation looks in an appendix:
+\begin{align}
+    \frac{\textup{d}}{\textup{d}t}\widehat{\mathbf{q}}(t)
+    &= \mathbf{F}(\widehat{\mathbf{q}}(t), \mathbf{u}(t)).
+\end{align}
+To change how this looks, play with the \verb"\numberwithin{}{}" command in \texttt{config.tex} \textbf{and} the \verb"\numberwithin{}{}" command in \texttt{utdiss.sty} under \verb"\def\appendices".
 \end{itemize}
