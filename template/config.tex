@@ -14,7 +14,6 @@
 % \usepackage{draftwatermark}   % "DRAFT" watermark in background.
 
 % Packages used solely for the explanation in the template.
-\usepackage{blindtext}          % Nonsense text.
 \usepackage{layout}             % Draw the page layout with \layout*.
 \usepackage{url}                % Typesetting URLs.
 \usepackage{verbatim}           % Quote block of text verbatim.
@@ -26,27 +25,22 @@
 % \oneandonehalfspacing \oneandonehalfspacequote        % DEFAULT
 % \doublespacing \doublespacequote
 
-%% If there are 10 or more sections, 10 or more subsections for a section,
-%% etc., you need to adjust the Table of Contents with \longtocentry.
-% \longtocentry
-
-% Math ------------------------------------------------------------------------
+% Math environments -----------------------------------------------------------
 
 \theoremstyle{plain}
-\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{theorem}{Theorem}[chapter]                  % Number by chapter
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{proposition}[theorem]{Proposition}
 
 \theoremstyle{definition}
-\newtheorem{definition}{Definition}[chapter]
+\newtheorem{definition}[theorem]{Definition}
 
 \theoremstyle{remark}
-\newtheorem{remark}{Remark}[chapter]
+\newtheorem{remark}[theorem]{Remark}
 \newtheorem*{notation}{Notation}
 
-% Number equations and theorems by chapter (Theorem 2.1, 2.2, ...).
-% \numberwithin{theorem}{chapter}
+% Number equations by chapter (Theorem 2.1, 2.2, ...).
 \numberwithin{equation}{chapter}
 \crefformat{equation}{(#2#1#3)}
 
