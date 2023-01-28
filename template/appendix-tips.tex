@@ -1,16 +1,8 @@
 \chapter{Tips and Tricks}
 \label{appendix:tips}
 
-\begin{figure}
-    \centering
-    \layout*
-    \vspace{.75in}
-    \caption{Layout of the page setup.}
-    \label{figure:layout}
-\end{figure}
-
 \begin{itemize}
-\item The margin dimensions are set at the top of `utdiss.tex`. If you decide to change them, add \verb"\usepackage{layout}" to \texttt{config.tex} and use the \verb"\layout*" command in the body of the document to see a schematic of the page setup.
+\item The margin dimensions are set at the top of \texttt{utdiss.tex}. If you decide to change them, add \verb"\usepackage{layout}" to \texttt{config.tex} and use the \verb"\layout*" command in the body of the document to see a schematic of the page setup.
 See \Cref{figure:layout}.
 \index{layout}
 
@@ -26,3 +18,12 @@ Use \verb"\Cref{}" if you want to ensure that the first word is capitalized (e.g
 \end{align}
 To change how this looks, play with the \verb"\numberwithin{}{}" command in \texttt{config.tex} \textbf{and} the \verb"\numberwithin{}{}" command in \texttt{utdiss.sty} under \verb"\def\appendices".
 \end{itemize}
+
+\newpage
+\begin{figure}[t]
+    \centering
+    \layout*
+    \vspace{.75in}
+    \caption{Layout of the page setup.}
+    \label{figure:layout}
+\end{figure}
