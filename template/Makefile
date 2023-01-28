@@ -1,12 +1,8 @@
-.PHONY: main clean help
+.PHONY: clean help
 
 
-# .tex --> .pdf via latexmk. 
-%.pdf: %.tex references.bib
-	latexmk -pdf -g $<
-
-
-main: main.pdf 
+main.pdf: *.tex utdiss.sty references.bib
+	latexmk -pdf -g main.tex
 
 clean:
 	latexmk -c
