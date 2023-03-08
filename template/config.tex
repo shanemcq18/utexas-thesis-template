@@ -5,10 +5,13 @@
 \usepackage{amscd}              % Write mathematics.
 \usepackage{amsmath}            % Write mathematics.
 \usepackage{amsthm}             % Write mathematics.
-\usepackage{cleveref}           % Make references with \cref{}.
 \usepackage{graphicx}           % Include figures from external files.
 \usepackage{lmodern}            % Handle font sizes.
 \usepackage{makeidx}            % For making an index.
+
+\usepackage[pdftex,bookmarksnumbered]{hyperref}           % Embed hyperlinks in the PDF.
+\usepackage{cleveref}           % Make references with \cref{}.
+% NOTE: hyperref must be imported BEFORE cleveref.
 
 % Optional packages.
 % \usepackage{draftwatermark}   % "DRAFT" watermark in background.
@@ -17,6 +20,10 @@
 \usepackage{layout}             % Draw the page layout with \layout*.
 \usepackage{url}                % Typesetting URLs.
 \usepackage{verbatim}           % Quote block of text verbatim.
+
+% Hyperlink setup -------------------------------------------------------------
+
+\hypersetup{colorlinks=false,linkcolor=black,urlcolor=black,citecolor=black}
 
 % Page setup ------------------------------------------------------------------
 
