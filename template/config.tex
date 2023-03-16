@@ -33,7 +33,7 @@
 
 % Math environments -----------------------------------------------------------
 
-\theoremstyle{plain}
+\theoremstyle{plain}        % If changed, also change line 280 of utdiss.sty.
 \newtheorem{theorem}{Theorem}[chapter]                  % Number by chapter
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{lemma}[theorem]{Lemma}
@@ -48,6 +48,6 @@
 
 % Number equations by chapter (Theorem 2.1, 2.2, ...).
 \numberwithin{equation}{chapter}
-\crefformat{equation}{(#2#1#3)}
+\crefformat{equation}{#2(#1)#3}
 
 % Other customizations --------------------------------------------------------

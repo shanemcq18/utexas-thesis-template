@@ -265,12 +265,21 @@
 
     \addcontentsline{toc}{chapter}{Appendices}
 
-    \setcounter{chapter}{0}
     \setcounter{section}{0}
+    \renewcommand{\theappendix}{\Alph{appendix}}
     \def\@chapapp{\appendixname}
     \chap@or@app=2
-    \def\thechapter{\Alph{chapter}}
-    \numberwithin{equation}{chapter}              % Equations (A.1), (A.2), ...
+    \def\thechapter{\Alph{appendix}}              % Appendix A, B, ...
+    \numberwithin{equation}{appendix}             % Equations (A.1), (A.2), ...
+    \numberwithin{figure}{appendix}
+
+    \makeatletter
+    \expandafter\let\csname theorem\endcsname\relax
+    \expandafter\let\csname c@theorem\endcsname\relax
+    \makeatother
+    \theoremstyle{plain}
+    \newtheorem{theorem}{Theorem}[appendix]       % Number by theorems by appdx
+
 }
 
 % Counters --------------------------------------------------------------------
@@ -302,6 +311,8 @@
 
 \newcounter{no@chapters}
 \setcounter{no@chapters}{0}
+\newcounter{appendix}
+\setcounter{appendix}{0}
 
 \newcommand\nochapters{
     \setcounter{no@chapters}{1}
@@ -324,7 +335,11 @@
 }
 
 \def\@chapter[#1]#2{\ifnum \c@secnumdepth >\m@ne
-    \refstepcounter{chapter}
+    \ifnum\chap@or@app=1
+        \refstepcounter{chapter}
+    \fi\ifnum\chap@or@app=2
+        \refstepcounter{appendix}
+    \fi
     \typeout{\@chapapp\space\thechapter.}
     \addcontentsline{toc}{chapter}{\@chapapp\space\thechapter.\hspace*{1em}#1}\else
     \addcontentsline{toc}{chapter}{#1}\fi
