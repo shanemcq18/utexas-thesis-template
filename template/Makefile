@@ -5,7 +5,7 @@ main.pdf: *.tex utdiss.sty references.bib
 	latexmk -pdf -g main.tex
 
 clean:
-	latexmk -c
+	latexmk -c -quiet
 
 help:
 	@echo "usage:"
