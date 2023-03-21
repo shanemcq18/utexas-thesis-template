@@ -43,11 +43,25 @@
 \evensidemargin 0pt
 \textwidth 6.5in
 
-% Other (optional) dimensions.
+% Paragraph, item, and equation spacing ---------------------------------------
 % \parindent .4in
 % \parskip 5 pt plus 1.5pt minus .5pt
 \itemsep 0 pt  % plus .5pt
 
+% Set the spacing between text and equation environments (align, etc.).
+\def\setskipspacing{%
+    \setlength{\abovedisplayskip}{12pt}%
+    \setlength{\belowdisplayskip}{12pt}%
+    \setlength{\abovedisplayshortskip}{12pt}%
+    \setlength{\belowdisplayshortskip}{12pt}%
+}
+
+\let\oldselectfont\selectfont
+\def\selectfont{\oldselectfont\setskipspacing}
+
+\setskipspacing
+
+% Text height settings ---------------------------------------------------------
 \newlength{\regular@textheight}
 \setlength{\regular@textheight}{\textheight}
 
@@ -182,14 +196,6 @@
 \def\l@paragraph{\@dottedtocline{4}{\c@fournum}{\five@num}}
 \def\l@subparagraph{\@dottedtocline{5}{\c@fivenum}{\six@num}}
 
-
-%
-% Define \nopage@addcontentsline to not place page numbers
-% in the table of contents.
-%
-\def\nopage@addcontentsline#1#2#3{\addtocontents{#1}%
-{\protect \contentsline {#2}{#3}{}}}  %%TODO: needed still?
-
 % Chapter headings ------------------------------------------------------------
 % Modified from `report.sty' to change the size of left skip
 %   for \chapter title which is longer than one line.
@@ -279,7 +285,6 @@
     \makeatother
     \theoremstyle{plain}
     \newtheorem{theorem}{Theorem}[appendix]       % Number by theorems by appdx
-
 }
 
 % Counters --------------------------------------------------------------------
@@ -335,9 +340,8 @@
 }
 
 \def\@chapter[#1]#2{\ifnum \c@secnumdepth >\m@ne
-    \ifnum\chap@or@app=1
-        \refstepcounter{chapter}
-    \fi\ifnum\chap@or@app=2
+    \refstepcounter{chapter}
+    \ifnum\chap@or@app=2
         \refstepcounter{appendix}
     \fi
     \typeout{\@chapapp\space\thechapter.}
