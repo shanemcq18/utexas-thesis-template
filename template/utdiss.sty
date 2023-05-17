@@ -266,10 +266,18 @@
         \markboth{}{}\pagestyle{myheadings}
         \thispagestyle{plain}
     \vspace*{\fill}
-    \centerline{\large\bf Appendices}
+    \ifhasparts
+        \centerline{\huge\bf Appendices}
+    \else
+        \centerline{\large\bf Appendices}
+    \fi
     \vspace*{\fill}
 
-    \addcontentsline{toc}{chapter}{Appendices}
+    \ifhasparts
+        \addcontentsline{toc}{part}{Appendices}
+    \else
+        \addcontentsline{toc}{chapter}{Appendices}
+    \fi
 
     \setcounter{section}{0}
     \renewcommand{\theappendix}{\Alph{appendix}}
@@ -288,9 +296,13 @@
 }
 
 % Counters --------------------------------------------------------------------
+\newif\ifhasparts
+\haspartsfalse
+
 % Redefinition of \@part for using by \part
 \newcount\with@parts\with@parts=0
 \def\@part[#1]#2{%
+    \haspartstrue
     \short@page
     \ifnum \c@secnumdepth >-2 \relax
         \refstepcounter{part}

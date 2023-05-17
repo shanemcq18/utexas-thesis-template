@@ -15,10 +15,12 @@ Use \verb"\Cref{}" if you want to ensure that the first word is capitalized (e.g
 
 \item This is how a labeled equation looks in an appendix:
 \begin{align}
-    \frac{\textup{d}}{\textup{d}t}\widehat{\mathbf{q}}(t)
-    &= \mathbf{F}(\widehat{\mathbf{q}}(t), \mathbf{u}(t)).
+    \label{eq:appendix:example}
+    \frac{\textup{d}}{\textup{d}t}\mathbf{q}(t)
+    &= \mathbf{F}(\mathbf{q}(t), \mathbf{u}(t)).
 \end{align}
 To change how this looks, play with the \verb"\numberwithin{}{}" command in \texttt{config.tex} \textbf{and} the \verb"\numberwithin{}{}" command in \texttt{utdiss.sty} under \verb"\def\appendices".
+We can reference the equation with \verb"\cref{}", which produces \cref{eq:appendix:example} in this case.
 
 \item The style of theorems, remarks, definitions, and so on is dictated by \verb"\theoremstyle{}" in \texttt{config.tex}.
 If you change the theorem style and have appendices, you may also have to change the \verb"\theoremstyle{}`" in \texttt{utdiss.sty} under \verb"\def\appendices".
