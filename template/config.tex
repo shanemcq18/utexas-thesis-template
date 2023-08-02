@@ -15,14 +15,14 @@
 % Optional packages.
 % \usepackage{draftwatermark}       % "DRAFT" watermark in background.
 
-% Packages used solely for the explanation in the template.
+% Packages used for the explanation in the template.
 \usepackage{layout}                 % Draw the page layout with \layout*.
 \usepackage{url}                    % Typesetting URLs.
 \usepackage{verbatim}               % Quote block of text verbatim.
 
 % Hyperlink setup -------------------------------------------------------------
 
-\hypersetup{colorlinks=true,allcolors=black}
+\hypersetup{hypertexnames=false,colorlinks=true,allcolors=black}
 
 % Page setup ------------------------------------------------------------------
 
@@ -33,8 +33,8 @@
 
 % Math environments -----------------------------------------------------------
 
-\theoremstyle{plain}        % If changed, also change line 280 of utdiss.sty.
-\newtheorem{theorem}{Theorem}[chapter]                  % Number by chapter
+\theoremstyle{plain}        % If changed, also change line 294 of utdiss.sty.
+\newtheorem{theorem}{Theorem}[chapter]                  % Number by chapter.
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{proposition}[theorem]{Proposition}

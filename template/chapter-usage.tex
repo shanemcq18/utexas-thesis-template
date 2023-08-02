@@ -182,6 +182,20 @@ This way, the next chunk of \texttt{main.tex} will then looks something like thi
 \end{verbatim}
 \index{commands!include@\verb+\include{}+}%
 
+Chapters can also be grouped into parts with the \verb+\part{}+ command.
+For example,
+\texttt{main.tex}
+\begin{verbatim}
+    \part{Background}
+    \include{chapter-introduction}
+    \part{Results}
+    \include{chapter-usage}
+    \include{chapter-examples}
+    \part{Discussion}
+    \include{chapter-conclusion}
+\end{verbatim}
+\index{commands!part@\verb+\part{}+}%
+
 \subsection{Chapters} % -------------------------------------------------------
 
 The beginning of each chapter file should begin with a \verb+\chapter[]{}+
