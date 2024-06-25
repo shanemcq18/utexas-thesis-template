@@ -3,7 +3,7 @@
 ## DISCLAIMERS
 
 1. This repository is **not** an official publication of the University of Texas at Austin. The template provided in this repository is not guaranteed to fulfill all of the official [Format Guidelines for Dissertations, Treatises, Theses, and Reports](https://utexas.box.com/shared/static/ffag6al7b0eaaqcheml6dcot9u3z6zit.pdf) as established by the Graduate School.
-2. This template has used successfully with 2023 requirements, but may not be up to date with current rules. If you are using this template and the Graduate School requires formatting changes, please [create an Issue](https://github.com/shanemcq18/utexas-thesis-template/issues/new) to document shortcomings in the template.
+2. This template was used successfully with 2023 requirements, but may not be up to date with current rules. If you are using this template and the Graduate School requires formatting changes, please [create an Issue](https://github.com/shanemcq18/utexas-thesis-template/issues/new) to document shortcomings in the template.
 3. This template is not a LaTeX tutorial. See [Overleaf](https://www.overleaf.com/learn/latex/Tutorials) for a thorough suite of tutorials.
 
 ## A Brief History
